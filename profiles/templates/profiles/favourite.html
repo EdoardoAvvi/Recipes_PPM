@@ -1,0 +1,35 @@
+% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profile Favourite - {{profile.user.username}}{% endblock %}
+
+{% block contents%}
+    <div class="container p-4">
+        <div class="profile">
+            <div class="info">
+                <div class="text-center">
+                    <h1>{{ profile.user.username }}</h1>
+                    <p><strong>Joined: </strong> {{ profile.user.date_joined|date:'Y M d' }}</p>
+                    <p><strong>Recipes create number: </strong>{{ profile.user.recipe_owner.count }}</p>
+                    {% if profile.bio is not none %}
+                        {{ profile.bio|safe }}
+                    {% endif %}
+                </div>
+                <div class="profile-recipe">
+                    <h2 class="text-center pb-4">Favourite Recipes</h2>
+                    {% for recipe in new %}
+                        <a href="{% url 'recipe_detail' recipe.id %}">
+                            <h3>{{ recipe.title }}</h3>
+                        </a>
+                        {{ recipe.posted_date }}
+                        <hr>
+                        <div class="container p-3">
+                            <a href="{% url "profiles:favourite_add" recipe.id %}" class="btn-btn-primary w5">Remove</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

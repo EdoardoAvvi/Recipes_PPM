@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profile - {{profile.user.username}}{% endblock %}
+
+{% block contents%}
+<div class="container p-4">
+    <div class="profile">
+        <div class="info">
+            <div class="text-center">
+                <h1>{{ profile.user.username }}</h1>
+                <p><strong>Joined: </strong> {{ profile.user.date_joined|date:'Y M d' }}</p>
+                <p><strong>Recipes create number: </strong>{{ profile.user.recipe_owner.count }}</p>
+                {% if profile.bio is not none %}
+                {{ profile.bio|safe }}
+                {% endif %}
+            <p></p>
+                {% if request.user == profile.user %}
+                    <button id="myBtn" class="btn btn-primary w-10 mb-4">Edit</button>
+                    <a href="#" class="btn btn-primary w-10 mb-4">
+                        Favourite
+                    </a>
+                {% endif %}
+            </div>
+        <hr>
+            <div class="profile-recipe">
+                <h2 class="text-center pb-4">Latest Recipes</h2>
+                {% for recipe in profile.user.recipe_owner.all %}
+                    <a href="{% url 'recipe_detail' recipe.id %}">
+                        <h3>{{ recipe.title }}</h3>
+                    </a>
+                    {{ recipe.posted_date }}
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- https://www.w3schools.com/howto/howto_css_modals.asp -->
+    <!-- The Modal -->
+    <div id="myModal" class="modal mt-5">
+        <!-- Modal content -->
+        <div class="modal-content container">
+            <span class="close fs-1 pe-2">&times;</span>
+            <form method="POST" action="{% url 'profiles:edit_profile' request.user.id %}" class="mb-2 p-2">
+                <h2 class="text-center fs-4">Edit Profile</h2>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary w-10">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+
+    <!-- https://www.w3schools.com/howto/howto_css_modals.asp -->
+    <script>
+        // Get the modal
+        const modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        const btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        const span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+{% endblock %}

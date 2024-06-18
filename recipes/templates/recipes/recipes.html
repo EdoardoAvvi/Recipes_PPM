@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Recipes{% endblock %}
+
+{% block contents %}
+    <h1 class="text-center p-2">
+        Latest Recipies
+    </h1>
+    <div class="container d-flex flex-row flex-wrap justify-content-center">
+    {% for recipe in recipes %}
+        <a href="{% url 'recipe_detail' recipe.id %}" class="recipes" aria-label="Click to view{{ recipe.title }}">
+            <div class="card m-3" style="width: 18rem;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <h2 class="card-title">{{ recipe.title }}</h2>
+                    </div>
+                     <p class="card-text">{{ recipe.description|truncatechars:100 }}</p>
+                 </div>
+             </div>
+        </a>
+    {% endfor %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Roboto:wght@400;500&display=swap');
+
+
+:root {
+    /** Fonts */
+    --title: 'EB Garamond', serif;
+    --main-font: 'Roboto', serif;
+
+    /* Colours */
+    --background: #3f006a0f;
+    --blue: #0d6efd;
+    --black: #000;
+    --off-white: #f6f6f6;
+    --white: #fff;
+    --orange: #ffbf50;
+
+    /* Utils */
+    --smal-box-shadow: 1px -1px 7px 0 #00000061;
+    --border: 1px solid #00000030;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--main-font);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--title);
+}
+
+/* Header */
+.navbar {
+    background-color: var(--off-white);
+    box-shadow: var(--smal-box-shadow);
+}
+
+a.nav-link {
+    color: var(--black);
+}
+
+.active {
+    border-bottom: 2px solid var(--blue);
+    font-weight: 500;
+}
+
+main {
+    flex: 1 0 auto;
+    background-color: var(--white);
+}
+/* Form */
+
+.form {
+    width: 100%;
+    margin: 3% auto;
+    box-shadow: var(--smal-box-shadow);
+    border-radius: 5px;
+}
+
+.card{
+    height: 90%;
+    margin-top: 1rem;
+}
+
+.recipes{
+    text-decoration: none;
+    color: var(--black);
+}
+.recipes:hover{
+    cursor: pointer;
+}
+
+.recipes-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.recipes-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-cont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+a.rec-container{
+    position: relative;
+    text-align: center;
+    color: var(--white);
+    margin: 2%;
+    overflow: hidden;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    box-shadow: var(--smal-box-shadow);
+}
+a.rec-container:hover{
+    cursor: pointer;
+    color: var(--black);
+}
+
+.centered{
+    width: 100%;
+    background-color: var(--black);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ingredients, .instructions, .recipe-detail{
+    width: 100%;
+}
+
+/* Profile style */
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.info{
+    width: 100%;
+    text-align: center;
+}
+
+.profile-recipes{
+    width: 100%;
+}
